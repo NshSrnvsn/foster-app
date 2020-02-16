@@ -1,0 +1,60 @@
+import pandas as pd
+daf=pd.read_csv('v1.csv')
+daf = daf.fillna(0)
+dataset=daf
+dataset
+
+dataset['Performance_PG'] = dataset['Performance_PG'].replace('N/A', 0)
+dataset['Performance_UG'] = dataset['Performance_UG'].replace('N/A', 0)
+dataset['Performance_10'] = dataset['Performance_10'].replace('N/A', 0)
+dataset['Performance_12'] = dataset['Performance_12'].replace('N/A', 0)
+
+dataset = dataset.infer_objects()
+
+def goo (dataset):
+
+    
+    Ds=0
+    Wb=0
+    
+    Ds+=sum(dataset[2:5])
+    Wb+=sum(dataset[5:15])
+        
+    
+    A=['R Programming','Data Science','Machine Learning','Neural Networks','Python','Deep Learning','MATLAB','Image Processing','NLP']   
+    B=['CSS','HTML','SQL','REST','DBMS','Django','PHP']
+    if dataset[15] !='Null':
+        for a in A:
+            Ds=Ds+1
+        for a in B:
+            Wb=Wb+1
+            
+   
+   
+   /* for r in dataset[20:24]:
+            r = r * 100
+            print(r)
+            if r in range (75,100):
+                
+                Wb=Wb+3
+                Ds=Ds+3
+            elif r  in range(50,75):
+                
+                Wb=Wb+2
+                Ds=Ds+2
+            else:
+                
+                Wb=Wb+1
+                Ds=Ds+1 */
+           
+        
+    if Wb> Ds:
+        return "Web Development"
+    else:
+        return "Data Science"
+
+
+            
+    
+    dataset['result'] = dataset.apply(goo, axis=1)
+    dataset
